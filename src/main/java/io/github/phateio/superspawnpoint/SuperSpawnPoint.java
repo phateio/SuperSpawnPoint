@@ -68,7 +68,7 @@ public class SuperSpawnPoint extends JavaPlugin implements Listener {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (args.length != 5) return false;
+        if (args.length < 5 || args.length > 7) return false;
         String playerName = args[0];
         OfflinePlayer offlinePlayer = getServer().getOfflinePlayerIfCached(playerName);
         if (offlinePlayer == null) {
@@ -86,8 +86,10 @@ public class SuperSpawnPoint extends JavaPlugin implements Listener {
         int x = Integer.parseInt(args[2]);
         int y = Integer.parseInt(args[3]);
         int z = Integer.parseInt(args[4]);
+        float yaw = args.length > 5 ? Float.parseFloat(args[5]) : 0;
+        float pitch = args.length > 6 ? Float.parseFloat(args[6]) : 0;
 
-        Location loc = new Location(world, x, y, z).toBlockLocation();
+        Location loc = new Location(world, x, y, z, yaw, pitch).toCenterLocation();
         if (offlinePlayer.isOnline()) {
             //noinspection ConstantConditions
             offlinePlayer.getPlayer().setBedSpawnLocation(loc, true);

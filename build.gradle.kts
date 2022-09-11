@@ -47,7 +47,7 @@ bukkit {
     commands {
         register("superspawnpoint") {
             permission = "superspawnpoint.command.superspawnpoint"
-            usage = "/<command> <player_name> <world> <x> <y> <z>"
+            usage = "/<command> <player_name> <world> <x> <y> <z> [yaw] [pitch]"
         }
     }
 }
